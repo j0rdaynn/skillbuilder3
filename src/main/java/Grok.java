@@ -6,6 +6,8 @@
  * @author (You Again)
  * @version (0.1)
  */
+
+
 public class Grok
 {
     private static final int DEFAULT_POWER_LEVEL=50;
@@ -20,8 +22,10 @@ public class Grok
      */
     public Grok()
     {
+        isAlive = true;
         setPowerLevel(DEFAULT_POWER_LEVEL);
     }
+
 
     /*
      * Initializes a Grok object to power powerLevel
@@ -30,9 +34,14 @@ public class Grok
      */
     public Grok(int powerLevel)
     {
+        if (powerLevel <= 0){
+            isAlive = false;
+        }
+        else{
+            isAlive = true;
+        }
         setPowerLevel(powerLevel);
     }
-
     // accessor methods
 
     /*
@@ -46,7 +55,12 @@ public class Grok
 
     public boolean isDead()
     {
-        // TODO: replace this line with your code here
+       if (powerLevel <= 0){
+           return true;
+       }
+       else{
+           return false;
+       }
     }
 
     // mutator methods
@@ -57,7 +71,23 @@ public class Grok
      */
     public void setPowerLevel(int powerLevel)
     {
-        this.powerLevel = powerLevel;
+        if(isAlive) {
+            if (powerLevel > 100){
+                setPowerLevel(MAX_POWER_LEVEL);
+            }
+            else if (powerLevel <= 0){
+                this.powerLevel = 0;
+                isAlive = false;
+            }
+            else
+                this.powerLevel = powerLevel;
+
+        /*
+Power cannot go above 100
+Power cannot go below 0
+Power can only change if grok is alive
+ */
+        }
     }
 
     /*
